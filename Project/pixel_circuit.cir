@@ -1,0 +1,12 @@
+[aimspice]
+[description]
+120
+* Pixel Circuit
+.include p18_cmos_models_tt.inc
+.include PhotoDiode.inc
+
+* Photodiode
+PD 1	VDD	N1
+
+* circuits lol
+[end]
