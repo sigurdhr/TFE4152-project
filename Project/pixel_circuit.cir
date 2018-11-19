@@ -3,29 +3,20 @@
 .include PhotoDiode.inc
 
 .subckt PIXEL VDD VSS EXPOSE ERASE NRE OUT
-	* Parameters
-	.param LN = 1U
-	.param kN = 2
-	.param WN = {kN*LN}
-	
-	.param LP = 1U
-	.param kP = 7.14
-	.param WP = {kP*LP}
-	
 	* Photodiode
-	XPD1	VDD	N1	PhotoDiode
+	XPD1	N1	VDD	PhotoDiode
 	
 	* Expose trigger
-	M1	N1 	EXPOSE 	N2	0 	NMOS 	L=LN 	W=WN
+	M1	N1 	EXPOSE 	N2	0 	NMOS 	L=LNswitch 	W=WNswitch
 	
 	* Erase trigger
-	M2	N2	ERASE		0	0 	NMOS 	L=LN 	W=WN
+	M2	N2	ERASE		0	0 	NMOS 	L=LNswitch 	W=WNswitch
 	
 	* Sampling Capacitor
-	Cs	N2	0	10f
+	Cs	N2	0	3p
 	
 	* Readout circuit
-	M3 	N3 	N2 	0 	VDD 	PMOS 	L=LP 	W=WP
-	M4 	OUT 	NRE	N3 	VDD 	PMOS 	L=LP 	W=WP
+	M3 	N3 	N2 	0 	VDD 	PMOS 	L=LPamp 	W=WPamp
+	M4 	OUT 	NRE	N3 	VDD 	PMOS 	L=LPamp 	W=WPamp
 
 .ends PIXEL

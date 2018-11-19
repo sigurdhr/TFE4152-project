@@ -2,27 +2,18 @@
 .include pixel_circuit.cir
 
 .subckt PIXELARRAY VDD VSS EXPOSE ERASE NRE_R1 NRE_R2 OUT1 OUT2
-	* Parameters
-	.param LN = 1U
-	.param kN = 2
-	.param WN = {kN*LN}
-	
-	.param LP = 1U
-	.param kP = 7.14
-	.param WP = {kP*LP}
-	
 	* Pixels
-	X1_1 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R1 	OUT1	PIXEL
-	X1_2 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R1 	OUT2	PIXEL
-	X2_1 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R2 	OUT1	PIXEL
-	X2_2 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R2 	OUT2	PIXEL
+	XP1_1 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R1 	OUT1	PIXEL
+	XP1_2 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R1 	OUT2	PIXEL
+	XP2_1 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R2 	OUT1	PIXEL
+	XP2_2 	VDD 	VSS 	EXPOSE 	ERASE 	NRE_R2 	OUT2	PIXEL
 	
 	* Active loads 
 	* Transistors
-	MC1 	VDD	OUT1	OUT1	VDD 	PMOS 	L=LP 	W=WP
-	MC2 	VDD	OUT2	OUT2	VDD 	PMOS 	L=LP 	W=WP
-	* Capacitors
-	CC1	OUT1	0	10f
-	CC2	OUT2	0	10f
-
+	MC1 	VDD	OUT1	OUT1	VDD 	PMOS 	L=LPload	W=WPload
+	MC2 	VDD	OUT2	OUT2	VDD 	PMOS 	L=LPload	W=WPload
+	* Parasitic Capacitors
+	CC1	OUT1	0	3p
+	CC2	OUT2	0	3p
+	
 .ends PIXELARRAY
