@@ -2,21 +2,21 @@
 .include p18_cmos_models_tt.inc
 .include PhotoDiode.inc
 
-.subckt PIXEL VDD VSS EXPOSE ERASE NRE OUT
+.subckt PIXEL VDD VSS EXPOSE ERASE NRE OUT PARAM: Ipd=750p
 	* Photodiode
-	XPD1	N1	VDD	PhotoDiode
+	XPD1	VDD	N1	PhotoDiode	Ipd={Ipd}
 	
 	* Expose trigger
-	M1	N1 	EXPOSE 	N2	0 	NMOS 	L=LNswitch 	W=WNswitch
+	M1	N1 	EXPOSE 	N2	VSS 	NMOS 	L=LNswitch 	W=WNswitch
 	
 	* Erase trigger
-	M2	N2	ERASE		0	0 	NMOS 	L=LNswitch 	W=WNswitch
+	M2	N2	ERASE		VSS	VSS	NMOS 	L=LNswitch 	W=WNswitch
 	
 	* Sampling Capacitor
-	Cs	N2	0	3p
+	Cs	N2	VSS	3p
 	
 	* Readout circuit
-	M3 	N3 	N2 	0 	VDD 	PMOS 	L=LPamp 	W=WPamp
-	M4 	OUT 	NRE	N3 	VDD 	PMOS 	L=LPamp 	W=WPamp
+	M3 	VSS 	N2 	N3 	VDD 	PMOS 	L=LPamp 	W=WPamp
+	M4 	N3 	NRE	OUT 	VDD 	PMOS 	L=LPswitch 	W=WPswitch
 
 .ends PIXEL
