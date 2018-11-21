@@ -13,7 +13,7 @@
 	M2	N2	ERASE		VSS	VSS	NMOS 	L=LNswitch 	W=WNswitch
 	
 	* Sampling Capacitor
-	Cs	N2	VSS	3p
+	Cs	N2	VSS	1.1p
 	
 	* Readout circuit
 	M3 	VSS 	N2 	N3 	VDD 	PMOS 	L=LPamp 	W=WPamp

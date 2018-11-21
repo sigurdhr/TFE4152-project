@@ -1,6 +1,6 @@
 [aimspice]
 [description]
-1936
+1837
 * Pixel testbench
 .include pixel_circuit.cir
 
@@ -18,24 +18,21 @@
 .param ERASE_DLY = {6*CLK_PERIOD + EXPOSURETIME} ! Delay for ERASE signal
 
 * Transistor Parameters ***********************
-* Switches - tune for high closed impedance and switching time
+* NMOS Switches - tune for high closed impedance
 .param LNswitch = 2U
-.param kNswitch = 1
-.param WNswitch = {kNswitch*LNswitch}
-	
-.param LPswitch = 2U
-.param kPswitch = 1
-.param WPswitch = {kPswitch*LPswitch}
+.param WNswitch = 2U
+
+* NMOS Switches - tune for low open impedance
+.param LPswitch = 0.7U
+.param WPswitch = 10U
 
 * Amplifiers - tune for linearity
-.param LPamp = 2U
-.param kPamp = 1
-.param WPamp = {kPamp*LPamp}
+.param LPamp = 0.7U
+.param WPamp = 10U
 
 * Active loads - tune for linearity
 .param LPload = 2U
-.param kPload = 2
-.param WPload = {kPload*LPload}
+.param WPload = 2U
 
 **********************************
 
@@ -81,5 +78,5 @@ X
 X
 0
 [ana]
-4 0
+1 0
 [end]
